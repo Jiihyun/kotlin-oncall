@@ -12,4 +12,17 @@ class WorkerName(val value: String) {
 
         private const val NAME_LENGTH_LIMIT: String = "[ERROR] 유효하지 않은 입력 값입니다. 다시 입력해 주세요."
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is WorkerName) return false
+
+        if (value != other.value) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        return value.hashCode()
+    }
 }
