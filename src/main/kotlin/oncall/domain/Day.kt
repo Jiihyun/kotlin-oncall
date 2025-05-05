@@ -3,7 +3,7 @@ package oncall.domain
 class Day(val value: Int, private val dateOfWeek: DayOfWeek, val isHoliday: Boolean) {
 
     fun isWeekDay(): Boolean {
-        return dateOfWeek.isWeekDay()
+        return dateOfWeek.isWeekDay() && !isHoliday
     }
 
     fun dateOfWeek(): String {

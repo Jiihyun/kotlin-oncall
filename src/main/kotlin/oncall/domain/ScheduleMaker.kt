@@ -26,14 +26,19 @@ class ScheduleMaker(val weekday: Schedule, val weekend: Schedule) {
     }
 
     private fun getWorker(day: Day, result: Map<Day, String>): String {
-        var worker = getWorker(day)
-        if (result.containsValue(worker)) {
+        var worker = getWorkerByDay(day)
+        if (day.value == 1) {
+            return worker
+        }
+        val oneDayBefore = day.value - 1
+        val dayBefore = result.keys.first { it.value == oneDayBefore }
+        if (result[dayBefore] == worker) {
             worker = getAnotherWorker(day)
         }
         return worker
     }
 
-    private fun getWorker(day: Day): String {
+    private fun getWorkerByDay(day: Day): String {
         if (day.isWeekDay()) {
             return weekday.getWorker()
         }
