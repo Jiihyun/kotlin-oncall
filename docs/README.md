@@ -30,7 +30,7 @@
 
 ### ▪︎ Month
 
-- [] Throw an `IllegalArgumentException` if the month value is not between 1 and 12
+- [x] Throw an `IllegalArgumentException` if the month value is not between 1 and 12
 
 ### ▪︎ Day of Week
 
