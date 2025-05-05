@@ -9,9 +9,9 @@
     - [] Re-prompt input whenever an `IllegalArgumentException` occurs, resuming the process. ([ERROR] 유효하지 않은 입력 값입니다.
       다시 입력해 주세요.)
 
-- [] Read the weekday and weekend emergency service order
-    - [] Throw an `IllegalArgumentException` if the value is null or blank
-    - [] Throw an `IllegalArgumentException` if the value cannot separate by comma
+- [x] Read the weekday and weekend emergency service order
+    - [x] Throw an `IllegalArgumentException` if the value is null or blank
+    - [x] Throw an `IllegalArgumentException` if the value cannot separate by comma
     - [] Re-prompt input whenever an `IllegalArgumentException` occurs, resuming the process from the weekday input
       step. ([ERROR] 유효하지 않은 입력 값입니다. 다시 입력해 주세요.)
 
