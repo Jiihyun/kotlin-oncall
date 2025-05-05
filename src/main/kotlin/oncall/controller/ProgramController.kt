@@ -1,0 +1,32 @@
+package oncall.controller
+
+import oncall.domain.DayOfWeek
+import oncall.domain.Month
+import oncall.domain.Schedule
+import oncall.domain.WorkerName
+import oncall.util.InputHandler
+import oncall.view.InputView
+
+class ProgramController {
+
+    fun run() {
+        val monthAndStartDay = InputHandler.retryOnInvalidInput { readMonthAndStartDay() }
+        val schedules = InputHandler.retryOnInvalidInput { readSchedules() }
+    }
+
+    private fun readMonthAndStartDay(): Pair<Month, DayOfWeek> {
+        val monthAndStartDay = InputView.readMonthAndStartDay()
+        val month = Month(monthAndStartDay.first)
+        val dayOfWeek = DayOfWeek.from(monthAndStartDay.second)
+        return Pair(month, dayOfWeek)
+    }
+
+    private fun readSchedules(): Pair<Schedule, Schedule> {
+        val weekdayWorkers = InputView.readWeekdayWorkers()
+        val weekdaySchedule = Schedule(weekdayWorkers.map { WorkerName(it) })
+
+        val weekendWorkers = InputView.readWeekendWorkers()
+        val weekendSchedule = Schedule(weekendWorkers.map { WorkerName(it) })
+        return Pair(weekdaySchedule, weekendSchedule)
+    }
+}
