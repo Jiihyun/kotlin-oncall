@@ -34,7 +34,7 @@
 
 ### ▪︎ Day of Week
 
-- [] Throw an `IllegalArgumentException` if the value is not between Sun and Sat
+- [x] Throw an `IllegalArgumentException` if the value is not between Sun and Sat
 
 ### ▪︎ Name
 
