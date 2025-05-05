@@ -39,7 +39,7 @@
 ### ▪︎ Name
 
 - [] Throw an `IllegalArgumentException` if the usernames are duplicated.
-- [] Throw an `IllegalArgumentException` if the length of username exceeds 5.
+- [x] Throw an `IllegalArgumentException` if the length of username exceeds 5.
 
 ### ▪︎ Team Size
 
