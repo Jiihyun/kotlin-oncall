@@ -9,12 +9,15 @@ object OutputView {
 
     fun showSchedule(month: Int, schedule: Map<Day, String>) {
         schedule.entries.forEach { (day, name) ->
-            if (day.isHoliday) {
-                println(WEEKEND_FORMAT.format(month, day.value, day.dateOfWeek(), name))
-                return
-            }
-            println(WEEKDAY_FORMAT.format(month, day.value, day.dateOfWeek(), name))
+            println(getFormat(day).format(month, day.value, day.dateOfWeek(), name))
         }
+    }
+
+    fun getFormat(day: Day): String {
+        if (day.isHoliday) {
+            return WEEKEND_FORMAT
+        }
+        return WEEKDAY_FORMAT
     }
 
     fun printError(message: String) {
