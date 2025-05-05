@@ -43,4 +43,4 @@
 
 ### ▪︎ Team Size
 
-- [] Throw an `IllegalArgumentException` if the length of sequence is not between 5 and 35
+- [x] Throw an `IllegalArgumentException` if the length of sequence is not between 5 and 35
