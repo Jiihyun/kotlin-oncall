@@ -2,10 +2,10 @@
 
 ## ▪︎ Input
 
-- [] Read the Month and start day of the week
-    - [] Throw an `IllegalArgumentException` if the value is null or blank
-    - [] Throw an `IllegalArgumentException` if the month value is not a number
-    - [] Throw an `IllegalArgumentException` if the value cannot separate by comma
+- [x] Read the Month and start day of the week
+    - [x] Throw an `IllegalArgumentException` if the value is null or blank
+    - [x] Throw an `IllegalArgumentException` if the month value is not a number
+    - [x] Throw an `IllegalArgumentException` if the value cannot separate by comma
     - [] Re-prompt input whenever an `IllegalArgumentException` occurs, resuming the process. ([ERROR] 유효하지 않은 입력 값입니다.
       다시 입력해 주세요.)
 
