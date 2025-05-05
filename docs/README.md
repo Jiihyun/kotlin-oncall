@@ -17,8 +17,8 @@
 
 ## ▪︎ Output
 
-- [] Show the oncall schedule
-    - [] `(휴일)` marked after the day of the week only on weekdays and legal holidays
+- [x] Show the oncall schedule
+    - [x] `(휴일)` marked after the day of the week only on weekdays and legal holidays
 
 ## ▪︎ Domain
 
