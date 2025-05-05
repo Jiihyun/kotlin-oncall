@@ -1,6 +1,6 @@
 package oncall.domain
 
-class Schedule(val workers: List<WorkerName>) {
+class Schedule(var workers: List<WorkerName>) {
 
     init {
         require(isUniqueName()) { NAMES_DUPLICATED_ERROR }
@@ -8,6 +8,25 @@ class Schedule(val workers: List<WorkerName>) {
     }
 
     private fun isUniqueName() = workers.toSet().size == workers.size
+
+    fun getWorker(): String {
+        val priorityWorker = workers.first()
+        changeSchedule(0)
+        return priorityWorker.value
+    }
+
+    fun getAnotherWorker(): String {
+        val priorityWorker = workers[1]
+        changeSchedule(1)
+        return priorityWorker.value
+    }
+
+    private fun changeSchedule(index: Int) {
+        val newSchedule: MutableList<WorkerName> = workers.toMutableList()
+        val worker = newSchedule.removeAt(index)
+        newSchedule.addLast(worker)
+        this.workers = newSchedule.toList()
+    }
 
     companion object {
         private const val MIN_VALUE: Int = 5

@@ -22,9 +22,9 @@
 
 ## ▪︎ Domain
 
-- [] Assign Emergency workdays in order
-    - []  change order if the worker works in a row
-    - []  emergency workers must be organized once each on weekdays and holidays schedule.
+- [x] Assign Emergency workdays in order
+    - [x]  Change order if the worker works continuously
+    - [x]  Emergency workers must be organized once each on weekdays and holidays schedule.
 
 ## ▪︎ Exception
 
