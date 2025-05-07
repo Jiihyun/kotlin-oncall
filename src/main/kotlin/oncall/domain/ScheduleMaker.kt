@@ -24,18 +24,11 @@ class ScheduleMaker(val weekday: Schedule, val weekend: Schedule) {
     }
 
     private fun getWorker(day: Day, result: Map<Day, String>): String {
-        var worker = peekWorkerByDay(day)
+        val worker = peekWorkerByDay(day)
         if (day.value == 1) {
             return getWorkerByDay(day)
         }
-        val oneDayBefore = day.value - 1
-        val dayBefore = result.keys.first { it.value == oneDayBefore }
-        if (result[dayBefore] == worker) {
-            worker = getAnotherWorker(day)
-        } else {
-            worker = getWorkerByDay(day)
-        }
-        return worker
+        return findWorker(day, result, worker)
     }
 
     private fun peekWorkerByDay(day: Day): String {
@@ -52,6 +45,27 @@ class ScheduleMaker(val weekday: Schedule, val weekend: Schedule) {
         return weekend.getWorker()
     }
 
+    private fun findWorker(
+        day: Day,
+        result: Map<Day, String>,
+        worker: String
+    ): String {
+        if (worksContinuously(day, result, worker)) {
+            return getAnotherWorker(day)
+        }
+        return getWorkerByDay(day)
+    }
+
+    private fun worksContinuously(
+        day: Day,
+        result: Map<Day, String>,
+        worker: String
+    ): Boolean {
+        val oneDayBefore = day.value - 1
+        val dayBefore = result.keys.first { it.value == oneDayBefore }
+        return result[dayBefore] == worker
+    }
+
     private fun getAnotherWorker(day: Day): String {
         if (day.isWeekDay()) {
             return weekday.getAnotherWorker()
@@ -61,6 +75,5 @@ class ScheduleMaker(val weekday: Schedule, val weekend: Schedule) {
 
     companion object {
         private const val FIRST_DAY: Int = 1
-        private const val YEAR: Int = 2023
     }
 }
