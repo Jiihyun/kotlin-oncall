@@ -16,7 +16,7 @@ class ProgramController {
         val schedules = InputHandler.retryOnInvalidInput { readSchedules() }
 
         val scheduleMaker = ScheduleMaker(schedules.first, schedules.second)
-        val schedule = scheduleMaker.makeSchedule(monthAndStartDay.first)
+        val schedule = scheduleMaker.makeSchedule(monthAndStartDay.first, monthAndStartDay.second)
 
         OutputView.showSchedule(monthAndStartDay.first.value, schedule)
     }

@@ -1,8 +1,8 @@
 package oncall.domain
 
-enum class DayOfWeek(val dayOfWeek: String, val value: Int) {
+enum class DayOfWeek(val dayOfWeek: String, val index: Int) {
 
-    SUN("일", 7),
+    SUN("일", 0),
     MON("월", 1),
     TUE("화", 2),
     WED("수", 3),
@@ -18,6 +18,12 @@ enum class DayOfWeek(val dayOfWeek: String, val value: Int) {
         return !isWeekend()
     }
 
+    fun getDayOfWeek(): DayOfWeek {
+        val nextIndex: Int = (this.index) % entries.size
+        return entries.firstOrNull { dayOfWeek -> dayOfWeek.index == nextIndex }
+            ?: throw IllegalStateException("[ERROR] Couldn't find the date of week.")
+    }
+
     companion object {
         private val WEEKEND: List<DayOfWeek> = listOf(SAT, SUN)
 
@@ -27,10 +33,10 @@ enum class DayOfWeek(val dayOfWeek: String, val value: Int) {
                 ?: throw IllegalArgumentException("[ERROR] 유효하지 않은 입력 값입니다. 다시 입력해 주세요.")
         }
 
-        fun fromValue(input: Int): DayOfWeek {
+        fun createNextDayOfWeek(dayOfWeek: DayOfWeek): DayOfWeek {
             return entries
-                .firstOrNull { it.value == input }
-                ?: throw IllegalArgumentException("[ERROR] 유효하지 않은 입력 값입니다. 다시 입력해 주세요.")
+                .firstOrNull { it.index == (dayOfWeek.index + 1) % entries.size }
+                ?: throw IllegalStateException("[ERROR] Couldn't find the date of week.")
         }
     }
 }

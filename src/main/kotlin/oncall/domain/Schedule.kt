@@ -9,6 +9,10 @@ class Schedule(var workers: List<WorkerName>) {
 
     private fun isUniqueName() = workers.toSet().size == workers.size
 
+    fun peekWorker(): String {
+        return workers.first().value
+    }
+
     fun getWorker(): String {
         val priorityWorker = workers.first()
         changeSchedule(0)

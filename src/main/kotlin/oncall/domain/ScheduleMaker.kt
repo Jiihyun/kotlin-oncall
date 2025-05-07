@@ -1,41 +1,48 @@
 package oncall.domain
 
-import java.time.LocalDate
-
 class ScheduleMaker(val weekday: Schedule, val weekend: Schedule) {
 
-    fun makeSchedule(month: Month): Map<Day, String> {
+    fun makeSchedule(month: Month, dayOfWeek: DayOfWeek): Map<Day, String> {
         val result: MutableMap<Day, String> = mutableMapOf()
 
-        val days = makeDays(month)
+        val days = makeDays(month, dayOfWeek)
         days.forEach { day ->
             result[day] = getWorker(day, result)
         }
         return result
     }
 
-    private fun makeDays(month: Month): List<Day> {
+    private fun makeDays(month: Month, dayOfWeek: DayOfWeek): List<Day> {
         val lastDay = month.getLastDay()
         val days: MutableList<Day> = mutableListOf()
+        var nextday = dayOfWeek
         for (day in FIRST_DAY..lastDay) {
-            val localDate = LocalDate.of(YEAR, month.value, day)
-            days.add(Day(day, DayOfWeek.fromValue(localDate.dayOfWeek.value), Holiday.contains(month.value, day)))
-            localDate.plusDays(1)
+            days.add(Day(day, nextday.getDayOfWeek(), Holiday.contains(month.value, day)))
+            nextday = DayOfWeek.createNextDayOfWeek(nextday)
         }
         return days
     }
 
     private fun getWorker(day: Day, result: Map<Day, String>): String {
-        var worker = getWorkerByDay(day)
+        var worker = peekWorkerByDay(day)
         if (day.value == 1) {
-            return worker
+            return getWorkerByDay(day)
         }
         val oneDayBefore = day.value - 1
         val dayBefore = result.keys.first { it.value == oneDayBefore }
         if (result[dayBefore] == worker) {
             worker = getAnotherWorker(day)
+        } else {
+            worker = getWorkerByDay(day)
         }
         return worker
+    }
+
+    private fun peekWorkerByDay(day: Day): String {
+        if (day.isWeekDay()) {
+            return weekday.peekWorker()
+        }
+        return weekend.peekWorker()
     }
 
     private fun getWorkerByDay(day: Day): String {
